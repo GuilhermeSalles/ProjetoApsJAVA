@@ -12,7 +12,6 @@ public class Main {
 		// Declaração dos separadores e cabeçalho
 		String Separador = ";";
 		String Separador_Nova_Linha = "\n";
-		String Cabecalho_Arquivo = "ra;nome;nota;creantionDate";
 
 		try {
 			// SimpleDateFormat é usado para mostrar como quer que a data seja printada
@@ -31,16 +30,13 @@ public class Main {
 
 			// A linha abaixo 'mostra' ao java aonde está o arquivo que quer escrever ou
 			// mudar
-			FileWriter fw = new FileWriter("/Users/guilhermebaltazar/Downloads/01/TesteEscrever.csv");
-
-			// A linha abaixo mostra o qual será o cabeçalho a ser usado, só para dar de
-			// exemplo, não é necessário colocar
-			// colocado apenas por questões didaticas.
-			fw.append(Cabecalho_Arquivo);
+			FileWriter fw = new FileWriter("/Users/guilhermebaltazar/Downloads/01/ALPOO_GRADUACAO_2018.csv", true);
+			// true colocado para não sobre escrever o arquivo todo, apenas adicionarq
 
 			// As linhas abaixo pegam cada dado do aluno ( da ), e com o ( fw ) fileWriter
 			// vai adicioa o separador para uma nova linha
 			// e vai pegando cada dado usando o get.
+			
 			for (DadosAlunos da : listAlunos) {
 				fw.append(Separador_Nova_Linha);
 				fw.append(da.getRa());
@@ -61,6 +57,8 @@ public class Main {
 			// Aqui é apenas para mostrar o erro se n achar o arquivo no seu computador
 			System.out.println(e.getMessage());
 		}
+		
+		
 
 	}
 
