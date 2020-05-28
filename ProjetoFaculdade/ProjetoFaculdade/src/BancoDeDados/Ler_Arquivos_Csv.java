@@ -92,7 +92,7 @@ public class Ler_Arquivos_Csv {
 	}
 
 //=========================================================================================================//
-	public static List<Notas_alunos> loadNotas() {
+	public static List<Notas_alunos> loadNotas(String mensagem) {
 
 		List<Notas_alunos> notas = new ArrayList<>();
 
@@ -101,7 +101,7 @@ public class Ler_Arquivos_Csv {
 		BufferedReader br;
 
 		try {
-			is = new FileInputStream("/Users/guilhermebaltazar/Downloads/01/ALPOO_GRADUACAO_2018.csv");
+			is = new FileInputStream("/Users/guilhermebaltazar/Downloads/01/Cursos csv/"+ mensagem+".csv");
 			isr = new InputStreamReader(is, StandardCharsets.UTF_8);
 			br = new BufferedReader(isr);
 
@@ -135,7 +135,7 @@ public class Ler_Arquivos_Csv {
 	}
 // =========================================================================================================//
 
-	public static List<Notas_alunos> loadNotaMenos(String iD) {
+	public static List<Notas_alunos> loadNotaMenos(String iD,String mensagem) {
 
 		List<Notas_alunos> notas = new ArrayList<>();
 
@@ -144,7 +144,7 @@ public class Ler_Arquivos_Csv {
 		BufferedReader br;
 
 		try {
-			is = new FileInputStream("/Users/guilhermebaltazar/Downloads/01/ALPOO_GRADUACAO_2018.csv");
+			is = new FileInputStream("/Users/guilhermebaltazar/Downloads/01/Cursos csv/"+  mensagem +".csv");
 			isr = new InputStreamReader(is, StandardCharsets.UTF_8);
 			br = new BufferedReader(isr);
 

@@ -70,14 +70,14 @@ public class Escrever_Arquivo_Csv {
 
 // =========================================================================================================//
 
-	public static void save_Nota_Aluno(List<Notas_alunos> notas) {
+	public static void save_Nota_Aluno(List<Notas_alunos> notas, String mensagem) {
 
 		OutputStream os;
 		OutputStreamWriter osw;
 		PrintWriter pw;
 
 		try {
-			os = new FileOutputStream("/Users/guilhermebaltazar/Downloads/01/ALPOO_GRADUACAO_2018.csv");
+			os = new FileOutputStream("/Users/guilhermebaltazar/Downloads/01/Cursos csv/"+ mensagem +".csv");
 			osw = new OutputStreamWriter(os, StandardCharsets.UTF_8);
 			pw = new PrintWriter(osw, true);
 			
@@ -97,31 +97,26 @@ public class Escrever_Arquivo_Csv {
 
 	}
 // =========================================================================================================//
-
-	public static void save_Alunos(List<Notas_alunos> notas) {
-
-		OutputStream os;
-		OutputStreamWriter osw;
-		PrintWriter pw;
-
-		try {
-			os = new FileOutputStream("/Users/guilhermebaltazar/Downloads/01/ALPOO_GRADUACAO_2018.csv");
-			osw = new OutputStreamWriter(os, StandardCharsets.UTF_8);
-			pw = new PrintWriter(osw, true);
-			
-			for (Notas_alunos nota : notas) {
-				pw.println(nota.getId() + ";" + nota.getNp1() + ";" + nota.getNp2() + ";" + nota.getRep() + ";" + nota.getExam());
-			}
-
-			os.close();
-			osw.close();
-			pw.close();
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-	}
+//	public static void Adiciona_Primeira_nota_zerada(List<Notas_alunos> notas, String mensagem) {
+//
+//		OutputStream os;
+//		OutputStreamWriter osw;
+//		PrintWriter pw;
+//
+//		try {
+//			os = new FileOutputStream("/Users/guilhermebaltazar/Downloads/01/Cursos csv/"+ mensagem +".csv");
+//			osw = new OutputStreamWriter(os, StandardCharsets.UTF_8);
+//			pw = new PrintWriter(osw, false);
+//			
+//			for (Notas_alunos nota : notas) {
+//				pw.println(nota.getId() + ";" + nota.getNp1() + ";" + nota.getNp2() + ";" + nota.getRep() + ";" + nota.getExam());
+//			}
+//
+//
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		}
+//
+//	}
+// =========================================================================================================//
 }

@@ -39,7 +39,7 @@ public class Curso {
 
 	@Override
 	public String toString() {
-		return "Curso [nome=" + nome + ", nivel=" + nivel + ", ano=" + ano + "]";
+		return "Nome do curso: " + nome + ", nivel: " + nivel + ", inicio de curso: " + ano + ".";
 	}
 
 }

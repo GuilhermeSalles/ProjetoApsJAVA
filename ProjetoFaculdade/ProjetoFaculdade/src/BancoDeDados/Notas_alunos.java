@@ -1,6 +1,7 @@
 package BancoDeDados;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class Notas_alunos {
 
@@ -61,46 +62,32 @@ public class Notas_alunos {
 		this.exam = exam;
 	}
 
-	public void notas_do_Aluno(String id) {
-		List<Aluno> alunos = Ler_Arquivos_Csv.loadAlunos();
-		List<Notas_alunos> notas = Ler_Arquivos_Csv.loadNotas();
-		String a;
-
-		for (Aluno aluno : alunos) {
-			a = aluno.getId();
-			if (a.equals(id)) {
-				for (Notas_alunos not : notas) {
-					if (not.getId().equals(aluno.getId())) {
-
-						double avg = (not.getNp1() + not.getNp2() + not.getRep()) / 2;
-
-						System.out.println("NP1: " + not.getNp1() + "\nNP2: " + not.getNp2() + "\nReposição: "
-								+ not.getRep() + "\nExame: " + not.getExam());
-
-						System.out.println("A média do aluno " + id + " é " + avg);
-						if (avg >= 7.0) {
-							System.out.println("Aluno foi aprovado!!");
-						} else {
-							double avg2 = (avg + not.getExam()) / 2;
-							if (avg2 >= 5.0) {
-								System.out.println("Aluno foi aprovado!!");
-							} else {
-								System.out.println("Reprovado!");
-							}
-						}
-
-					}
-				}
+	public static double myRead(String mensagem) {
+		@SuppressWarnings("resource")
+		Scanner sc = new Scanner(System.in);
+		System.out.print(mensagem);
+		double nota = sc.nextDouble();
+		if (nota > 0 && nota < 10) {
+			return nota;
+		} else {
+			while (nota < 0 || nota > 10) {
+				System.out.print("Digite novamente a nota novamente: ");
+				nota = sc.nextDouble();
 			}
+			return nota;
 		}
 	}
 
-	
-
 	@Override
 	public String toString() {
-		return "Notas_alunos id: " + id + ", np1: " + np1 + ", np2: " + np2 + ", reposição:" + rep + ", exame: " + exam
-				+ "]";
+		List<Aluno> alunos = Ler_Arquivos_Csv.loadAlunos();
+		String aux = null;
+		for (Aluno aluno : alunos) {
+			aux = "--------------------------------------------------------" + "\nNotas dos alunos " + "\nid: " + id
+					+ ", Nome: " + aluno.getNome() + ", np1: " + np1 + ", np2: " + np2 + ", reposição:" + rep
+					+ ", exame: " + exam + "\n--------------------------------------------------------\n";
+		}
+		return aux;
 	}
 
 }
