@@ -10,6 +10,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+import Entities.Aluno;
+import Entities.Curso;
+import Entities.Notas_alunos;
+
 public class Ler_Arquivos_Csv {
 
 //=========================================================================================================//	
@@ -92,7 +96,7 @@ public class Ler_Arquivos_Csv {
 	}
 
 //=========================================================================================================//
-	public static List<Notas_alunos> loadNotas(String mensagem) {
+	public static List<Notas_alunos> loadNotas(String mensagem,String nivel, int ano) {
 
 		List<Notas_alunos> notas = new ArrayList<>();
 
@@ -101,7 +105,7 @@ public class Ler_Arquivos_Csv {
 		BufferedReader br;
 
 		try {
-			is = new FileInputStream("/Users/guilhermebaltazar/Downloads/01/Cursos csv/"+ mensagem+".csv");
+			is = new FileInputStream("/Users/guilhermebaltazar/Downloads/01/Cursos csv/" + mensagem + "-" + nivel + "-" + ano + ".csv");
 			isr = new InputStreamReader(is, StandardCharsets.UTF_8);
 			br = new BufferedReader(isr);
 
@@ -135,7 +139,7 @@ public class Ler_Arquivos_Csv {
 	}
 // =========================================================================================================//
 
-	public static List<Notas_alunos> loadNotaMenos(String iD,String mensagem) {
+	public static List<Notas_alunos> loadNotaMenos(String iD, String mensagem, String nivel, int ano) {
 
 		List<Notas_alunos> notas = new ArrayList<>();
 
@@ -144,7 +148,7 @@ public class Ler_Arquivos_Csv {
 		BufferedReader br;
 
 		try {
-			is = new FileInputStream("/Users/guilhermebaltazar/Downloads/01/Cursos csv/"+  mensagem +".csv");
+			is = new FileInputStream("/Users/guilhermebaltazar/Downloads/01/Cursos csv/" + mensagem + "-" + nivel + "-" + ano + ".csv");
 			isr = new InputStreamReader(is, StandardCharsets.UTF_8);
 			br = new BufferedReader(isr);
 

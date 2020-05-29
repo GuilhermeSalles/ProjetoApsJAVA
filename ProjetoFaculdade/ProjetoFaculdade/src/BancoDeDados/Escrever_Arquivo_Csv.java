@@ -9,6 +9,10 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+import Entities.Aluno;
+import Entities.Curso;
+import Entities.Notas_alunos;
+
 public class Escrever_Arquivo_Csv {
 
 //=========================================================================================================//
@@ -26,7 +30,7 @@ public class Escrever_Arquivo_Csv {
 			for (Aluno aluno : alunos) {
 				pw.println(aluno.getId() + ";" + aluno.getNome());
 			}
-
+			System.out.println("Aluno adcionado com sucesso!!");
 			os.close();
 			osw.close();
 			pw.close();
@@ -54,7 +58,7 @@ public class Escrever_Arquivo_Csv {
 			for (Curso curso : cursos) {
 				pw.println(curso.getNome() + ";" + curso.getNivel() + ";" + curso.getAno());
 			}
-
+			System.out.println("Curso adicionado com sucesso!!");
 			os.close();
 			osw.close();
 			pw.close();
@@ -70,21 +74,22 @@ public class Escrever_Arquivo_Csv {
 
 // =========================================================================================================//
 
-	public static void save_Nota_Aluno(List<Notas_alunos> notas, String mensagem) {
+	public static void save_Nota_Aluno(List<Notas_alunos> notas, String mensagem, String nivel, int ano) {
 
 		OutputStream os;
 		OutputStreamWriter osw;
 		PrintWriter pw;
 
 		try {
-			os = new FileOutputStream("/Users/guilhermebaltazar/Downloads/01/Cursos csv/"+ mensagem +".csv");
+			os = new FileOutputStream("/Users/guilhermebaltazar/Downloads/01/Cursos csv/" + mensagem + "-" + nivel + "-" + ano + ".csv");
 			osw = new OutputStreamWriter(os, StandardCharsets.UTF_8);
 			pw = new PrintWriter(osw, true);
-			
-			for (Notas_alunos nota : notas) {
-				pw.println(nota.getId() + ";" + nota.getNp1() + ";" + nota.getNp2() + ";" + nota.getRep() + ";" + nota.getExam());
-			}
 
+			for (Notas_alunos nota : notas) {
+				pw.println(nota.getId() + ";" + nota.getNp1() + ";" + nota.getNp2() + ";" + nota.getRep() + ";"
+						+ nota.getExam());
+			}
+			System.out.println("Notas adicionadas com sucesso!!");
 			os.close();
 			osw.close();
 			pw.close();
@@ -96,27 +101,5 @@ public class Escrever_Arquivo_Csv {
 		}
 
 	}
-// =========================================================================================================//
-//	public static void Adiciona_Primeira_nota_zerada(List<Notas_alunos> notas, String mensagem) {
-//
-//		OutputStream os;
-//		OutputStreamWriter osw;
-//		PrintWriter pw;
-//
-//		try {
-//			os = new FileOutputStream("/Users/guilhermebaltazar/Downloads/01/Cursos csv/"+ mensagem +".csv");
-//			osw = new OutputStreamWriter(os, StandardCharsets.UTF_8);
-//			pw = new PrintWriter(osw, false);
-//			
-//			for (Notas_alunos nota : notas) {
-//				pw.println(nota.getId() + ";" + nota.getNp1() + ";" + nota.getNp2() + ";" + nota.getRep() + ";" + nota.getExam());
-//			}
-//
-//
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		}
-//
-//	}
-// =========================================================================================================//
+//=========================================================================================================//
 }

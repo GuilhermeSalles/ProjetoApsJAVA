@@ -7,10 +7,10 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
 public class Cria_Arquivos_CSV {
-	public static void Criar_Arquivo(String mensagem) {
+	public static void Criar_Arquivo(String mensagem, String nivel, int ano) {
 		try {
 
-			File f = new File("/Users/guilhermebaltazar/Downloads/01/Cursos csv/" + mensagem + ".csv");
+			File f = new File("/Users/guilhermebaltazar/Downloads/01/Cursos csv/" + mensagem + "-" + nivel + "-" + ano + ".csv");
 
 			OutputStream os = (OutputStream) new FileOutputStream(f);
 			String encoding = "UTF8";
