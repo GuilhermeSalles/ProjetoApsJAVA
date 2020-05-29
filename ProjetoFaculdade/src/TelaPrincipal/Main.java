@@ -232,7 +232,7 @@ public class Main {
 					System.out.print("Qual o curso que deseja Listas os alunos: ");
 					sc.nextLine();
 					mensagem = sc.nextLine();
-					System.out.print("Digite o nivel do curso:");
+					System.out.print("Digite o nivel do curso: ");
 					String nivel = sc.next();
 					String nivel2 = nivel.substring(0, 1);
 					String NivelF = null;
@@ -243,7 +243,7 @@ public class Main {
 					}
 					System.out.print("Digite o ano do curso: ");
 					ano = sc.nextInt();
-
+					System.out.println();
 					for (Curso curso : cursos) {
 						if (curso.getNome().equals(mensagem) && curso.getNivel().equals(NivelF)
 								&& curso.getAno() == ano) {
@@ -252,7 +252,7 @@ public class Main {
 
 							for (Notas_alunos nota : notas) {
 								for (Aluno aluno : alunos) {
-									if (nota.getId().equals(aluno.getId())) {
+									if (nota.getId().equals(aluno.getId()) && !(nota.getId().equals("0")) ) {
 										System.out.println("Id: " + aluno.getId() + ", Nome: " + aluno.getNome());
 										break;
 									}
@@ -267,18 +267,20 @@ public class Main {
 				String mensagem = null;
 				String id = null;
 				int ano = 0;
+				boolean teste = false;
+				boolean teste2 = false;
 
 				List<Curso> cursos = Ler_Arquivos_Csv.loadCursos();
 				System.out.print("Qual o curso que deseja adicionar as notas ou alterar: ");
 				sc.nextLine();
 				mensagem = sc.nextLine();
-				System.out.print("Digite o nivel do curso:");
+				System.out.print("Digite o nivel do curso: ");
 				String nivel = sc.nextLine();
 				String nivel2 = nivel.substring(0, 1);
 				String NivelF = null;
-				if (nivel2.toLowerCase().substring(0, 1).contentEquals("p")) {
+				if (nivel2.toLowerCase().contentEquals("p")) {
 					NivelF = "POS_GRADUACAO";
-				} else if (nivel2.toLowerCase().substring(0, 1).contentEquals("g")) {
+				} else if (nivel2.toLowerCase().contentEquals("g")) {
 					NivelF = "GRADUACAO";
 				}
 				System.out.print("Digite o ano do curso: ");
@@ -293,57 +295,67 @@ public class Main {
 							List<Notas_alunos> notas = Ler_Arquivos_Csv.loadNotas(mensagem, NivelF, ano);
 							System.out.print("Digite o Id do aluno: ");
 							id = sc.next();
+
+							for (Notas_alunos not : notas) {
+								if (id.equals(not.getId())) {
+									teste = true;
+								}
+
+							}
+
 							for (Aluno aluno : alunos) {
-								for (Notas_alunos not : notas) {
-									if (id.equals(not.getId())) {
-
-										System.out.println("Este aluno já existe.");
-										System.out.print("deseja alterar as notas deste aluno? [Sim/Não]");
-										String respos = sc.next();
-
-										if (respos.toLowerCase().substring(0, 1).contentEquals("s")) {
-
-											List<Notas_alunos> notas1 = Ler_Arquivos_Csv.loadNotaMenos(id, mensagem,
-													NivelF, ano);
-											double np1 = Notas_alunos.myRead("Nota da np1: ");
-
-											double np2 = Notas_alunos.myRead("Nota a np2: ");
-
-											double rep = Notas_alunos.myRead("Nota a rep: ");
-
-											double exam = Notas_alunos.myRead("Nota a exame: ");
-
-											Notas_alunos nota = new Notas_alunos();
-											nota = new Notas_alunos(id, np1, np2, rep, exam);
-											notas1.add(nota);
-											Escrever_Arquivo_Csv.save_Nota_Aluno(notas1, mensagem, NivelF, ano);
-											break;
-
-										} else {
-											reset = "1";
-										}
 								if (id.equals(aluno.getId())) {
+									teste2 = true;
+								}
 
-											List<Notas_alunos> notas1 = Ler_Arquivos_Csv.loadNotaMenos(id, mensagem,
-													NivelF, ano);
-											double np1 = Notas_alunos.myRead("Nota da np1: ");
+							}
 
-											double np2 = Notas_alunos.myRead("Nota a np2: ");
+							if (teste == true) {
+								System.out.println("Este aluno já existe.");
+								System.out.print("deseja alterar as notas deste aluno? [Sim/Não]");
+								String respos = sc.next();
 
-											double rep = Notas_alunos.myRead("Nota a rep: ");
+								if (respos.toLowerCase().substring(0, 1).contentEquals("s")) {
 
-											double exam = Notas_alunos.myRead("Nota a exame: ");
+									List<Notas_alunos> notas1 = Ler_Arquivos_Csv.loadNotaMenos(id, mensagem, NivelF,
+											ano);
+									double np1 = Notas_alunos.myRead("Nota da np1: ");
 
-											Notas_alunos nota = new Notas_alunos();
-											nota = new Notas_alunos(id, np1, np2, rep, exam);
-											notas1.add(nota);
-											Escrever_Arquivo_Csv.save_Nota_Aluno(notas1, mensagem, NivelF, ano);
-											break;
-										}
-										break;
-									}
+									double np2 = Notas_alunos.myRead("Nota a np2: ");
+
+									double rep = Notas_alunos.myRead("Nota a rep: ");
+
+									double exam = Notas_alunos.myRead("Nota a exame: ");
+
+									Notas_alunos nota = new Notas_alunos();
+									nota = new Notas_alunos(id, np1, np2, rep, exam);
+									notas1.add(nota);
+									Escrever_Arquivo_Csv.save_Nota_Aluno(notas1, mensagem, NivelF, ano);
+									reset = "0";
+
+								} else {
+									reset = "1";
+								}
+							} else {
+								if (teste2 == true) {
+
+									List<Notas_alunos> notas2 = Ler_Arquivos_Csv.loadNotas(mensagem, NivelF, ano);
+									double np1 = Notas_alunos.myRead("Nota da np1: ");
+
+									double np2 = Notas_alunos.myRead("Nota a np2: ");
+
+									double rep = Notas_alunos.myRead("Nota a rep: ");
+
+									double exam = Notas_alunos.myRead("Nota a exame: ");
+
+									Notas_alunos nota = new Notas_alunos();
+									nota = new Notas_alunos(id, np1, np2, rep, exam);
+									notas2.add(nota);
+									Escrever_Arquivo_Csv.save_Nota_Aluno(notas2, mensagem, NivelF, ano);
+									reset = "0";
 								}
 							}
+
 						}
 					}
 
